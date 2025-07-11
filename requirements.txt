@@ -1,0 +1,6 @@
+langchain==0.1.16
+langchain-community==0.0.35
+huggingface_hub==0.20.3
+weaviate-client>=3.26.7,<4.0.0
+sentence-transformers
+pypdf
