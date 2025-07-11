@@ -1,6 +1,5 @@
-langchain==0.1.16
-langchain-community==0.0.35
-huggingface_hub==0.20.3
-weaviate-client>=3.26.7,<4.0.0
-sentence-transformers
-pypdf
+pandas==2.2.2
+numpy==1.24.4
+scikit-surprise==1.1.3
+joblib==1.4.2
+kaggle==1.6.12
