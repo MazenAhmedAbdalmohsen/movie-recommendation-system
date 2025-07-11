@@ -1,47 +1,66 @@
 # 🎬 Movie Recommendation System
 
-This project builds a movie recommendation system using the [Movie Recommendation System dataset on Kaggle](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system). It uses collaborative filtering (SVD algorithm from Surprise library) to recommend personalized movie suggestions based on user ratings.
+This project builds a **hybrid movie recommendation system** using both collaborative filtering and content-based filtering. It leverages user ratings and movie metadata to suggest personalized movies.
 
-## 📁 Dataset
+## 📂 Dataset
 
-The dataset contains two main files:
+The dataset is sourced from Kaggle:
 
-- **movies.csv**: Contains movie metadata (movieId, title, genres).
-- **ratings.csv**: Contains user ratings for movies (userId, movieId, rating, timestamp).
+- **Source**: [Movie Recommendation System Dataset](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system)
+- **Files**:
+  - `movies.csv` – Movie metadata (title, genres)
+  - `ratings.csv` – User ratings (userId, movieId, rating)
 
-Dataset link: [Kaggle - Movie Recommendation System](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system)
+---
 
-## 🚀 Features
+## 🔍 Features
 
-- Clean and explore movies and ratings data.
-- Build collaborative filtering model using the SVD algorithm.
-- Train/test split for model evaluation.
-- Calculate RMSE for performance.
-- Generate top-N recommendations for a specific user.
-- Save and load trained model using `joblib`.
-- Ready for deployment or integration into a movie platform.
+✅ Collaborative Filtering using **SVD (Singular Value Decomposition)**  
+✅ Content-Based Filtering using **TF-IDF Vectorization**  
+✅ Hybrid recommender support  
+✅ Saved models for deployment  
+✅ Built for use in **Google Colab**
 
-## 🧠 Model
+---
 
-The model is built using the **Surprise** library:
+## 📦 Project Files
 
-- Algorithm: `SVD` (Singular Value Decomposition)
-- Metric: `RMSE` (Root Mean Square Error)
-- Saved model file: `svd_movie_recommender.pkl`
+| File | Description |
+|------|-------------|
+| `Movie_Recommendation_System.ipynb` | Main notebook |
+| `movie_recommender_svd_model.pkl` | Trained collaborative filtering model |
+| `tfidf_matrix.pkl` | TF-IDF matrix of cleaned movie titles |
+| `tfidf_vectorizer.pkl` | TF-IDF vectorizer fitted on movie titles |
+| `README.md` | Project documentation |
+| `requirements.txt` | Required dependencies |
 
-## 📝 How to Use in Google Colab
+---
 
-1. Upload your `kaggle.json` to authenticate Kaggle API.
-2. Run the notebook: `Movie_Recommendation_System.ipynb`.
-3. Train the model and generate movie recommendations.
-4. Use the saved model (`svd_movie_recommender.pkl`) for inference.
+## 🧠 Model Details
 
-## 💻 Key Notebooks
+### 1. Collaborative Filtering (SVD)
 
-- **Movie_Recommendation_System.ipynb**: Main notebook for training, evaluation, and generating recommendations.
+- Library: `Surprise`
+- Training data: `ratings.csv`
+- Evaluation metric: RMSE
+- Saved model: `movie_recommender_svd_model.pkl`
 
-## 📦 Dependencies
+### 2. Content-Based Filtering (TF-IDF)
 
-Install required libraries:
-```bash
-pip install scikit-surprise kaggle
+- Library: `sklearn`
+- Input: `movies.csv['title']`
+- Vectorizer: `TfidfVectorizer(stop_words='english')`
+- Saved artifacts:
+  - `tfidf_matrix.pkl`
+  - `tfidf_vectorizer.pkl`
+
+---
+
+## 🧪 Usage Example
+
+### Predict a Rating (Collaborative)
+
+```python
+from joblib import load
+model = load("movie_recommender_svd_model.pkl")
+model.predict(str(1), str(50))  # userId=1, movieId=50
